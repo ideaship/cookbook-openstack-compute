@@ -39,6 +39,12 @@ apache_site 'nova-placement-api' do
   only_if { platform_family?('debian') }
 end
 
+service 'disable nova-placement-api service' do
+  service_name platform_options['api_placement_service']
+  supports status: true, restart: true
+  action [:disable, :stop]
+end
+
 nova_user = node['openstack']['compute']['user']
 nova_group = node['openstack']['compute']['group']
 execute 'placement-api: nova-manage api_db sync' do
@@ -47,12 +53,6 @@ execute 'placement-api: nova-manage api_db sync' do
   group nova_group
   command 'nova-manage api_db sync'
   action :run
-end
-
-service 'disable nova-placement-api service' do
-  service_name platform_options['api_placement_service']
-  supports status: true, restart: true
-  action [:disable, :stop]
 end
 
 bind_service = node['openstack']['bind_service']['all']['placement-api']
