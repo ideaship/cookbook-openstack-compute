@@ -33,6 +33,12 @@ platform_options['api_placement_packages'].each do |pkg|
   end
 end
 
+# Disable default config to prevent concurrent apache restarts from using it.
+apache_site 'nova-placement-api' do
+  enable false
+  only_if { platform_family?('debian') }
+end
+
 nova_user = node['openstack']['compute']['user']
 nova_group = node['openstack']['compute']['group']
 execute 'placement-api: nova-manage api_db sync' do
