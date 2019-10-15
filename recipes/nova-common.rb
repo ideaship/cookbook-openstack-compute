@@ -222,7 +222,3 @@ template '/etc/nova/rootwrap.conf' do
   group 'root'
   mode 0o0644
 end
-
-execute 'enable nova login' do
-  command "usermod -s /bin/sh #{node['openstack']['compute']['user']}"
-end
