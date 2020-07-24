@@ -24,6 +24,7 @@ class ::Chef::Recipe
   include Apache2::Cookbook::Helpers
 end
 
+include_recipe 'openstack-compute::nova-apache'
 include_recipe 'openstack-compute::nova-common'
 include_recipe 'openstack-compute::_nova_cell'
 

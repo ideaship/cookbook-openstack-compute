@@ -28,6 +28,7 @@ class ::Chef::Recipe
   include Apache2::Cookbook::Helpers
 end
 
+include_recipe 'openstack-compute::nova-apache'
 include_recipe 'openstack-compute::nova-common'
 
 platform_options = node['openstack']['compute']['platform']
