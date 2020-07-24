@@ -53,6 +53,7 @@ end
 service platform_options['api_placement_service'] do
   supports status: true, restart: true
   action [:disable, :stop]
+  subscribes :restart, 'template[/etc/nova/nova.conf]'
 end
 
 apache2_site 'nova-placement-api' do

@@ -57,6 +57,7 @@ service 'nova-api-os-compute' do
   service_name platform_options['api_os_compute_service']
   supports status: true, restart: true
   action [:disable, :stop]
+  subscribes :restart, 'template[/etc/nova/nova.conf]'
 end
 
 bind_service = node['openstack']['bind_service']['all']['compute-api']

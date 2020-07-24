@@ -210,7 +210,6 @@ template '/etc/nova/nova.conf' do
     # with the glance_api_servers configuration option...
     service_config: nova_conf_options
   )
-  notifies :restart, 'service[apache2]'
 end
 
 # delete all secrets saved in the attribute

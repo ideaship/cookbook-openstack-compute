@@ -49,6 +49,7 @@ service 'nova-api-metadata' do
   service_name platform_options['compute_api_metadata_service']
   supports status: true, restart: true
   action [:disable, :stop]
+  subscribes :restart, 'template[/etc/nova/nova.conf]'
 end
 
 bind_service = node['openstack']['bind_service']['all']['compute-metadata-api']
